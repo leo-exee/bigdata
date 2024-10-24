@@ -1,5 +1,5 @@
 import logging
-from fastapi import FastAPI, Request, UploadFile
+from fastapi import FastAPI, UploadFile
 from fastapi.responses import JSONResponse
 
 from models.http_response import ErrorResponse
