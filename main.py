@@ -5,12 +5,13 @@ from fastapi import status
 
 from models.http_response import ErrorResponse
 from models.item import ItemOutDTO
-from services.file_service import count_word_in_text_service
+from services.file_service import (
+    count_word_in_genome_service,
+    count_word_in_text_service,
+)
 from utils.format_util import format_error_response
 
-app = FastAPI()
-
-REDUCE = "$HADOOP_HOME/share/hadoop/mapreduce/hadoop-mapreduce-examples-3.2.1.jar"
+app = FastAPI(title="API", swagger_ui_parameters={"defaultModelsExpandDepth": -1})
 
 
 @app.post(
@@ -43,7 +44,7 @@ async def count_word_in_text_controller(file: UploadFile):
 
 @app.post(
     "/genome",
-    response_model=list[ItemOutDTO],
+    response_model=ItemOutDTO,
     summary="Count the words in a genome",
     description="Take a file, count the words and return the word count list",
     responses={
@@ -66,7 +67,7 @@ async def count_word_in_text_controller(file: UploadFile):
     },
 )
 async def count_word_in_genome_controller(file: UploadFile, chunk: int = 8):
-    return count_word_in_text_service(file)
+    return await count_word_in_genome_service(file, chunk)
 
 
 @app.exception_handler(ErrorResponse)
