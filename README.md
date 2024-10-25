@@ -19,4 +19,4 @@ uvicorn main:app --reload --host 0.0.0.0 --port 8000
 ```
 
 ## Go to the doc
-To access the doc, please go to the [project swagger](http://localhost:8000/docs).
+To access the doc and use the API, please go to the [project swagger](http://localhost:8000/docs).
