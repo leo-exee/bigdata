@@ -20,6 +20,6 @@ def reduce_service(file_path: str) -> str:
     except Exception as e:
         raise ErrorResponse(
             status=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            message="The input directory has not been created",
+            message="Failed to run the reduce service",
             details=str(e),
         )
